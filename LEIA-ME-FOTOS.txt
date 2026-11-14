@@ -1,0 +1,16 @@
+KID CHIPS - COMO COLOCAR AS FOTOS
+
+1. Abra a pasta imagens.
+2. Troque capa.jpg pela foto grande que aparece no topo do site.
+3. Troque batata-inglesa.jpg pela foto da batata recheada.
+4. Para os produtos principais, salve suas fotos nesta pasta com estes nomes:
+   x-bacon.jpg, x-salada.jpg, x-burguer.jpg, x-tudo.jpg, hamburguer.jpg,
+   batata-frita.jpg, fritas-com-queijo.jpg, parmegiana.jpg, panqueca.jpg.
+5. Para outros produtos, o index.html gera um nome a partir do nome do item,
+   sem acentos e com hifens. Exemplo: 'X Egg' vira imagens/x-egg.jpg.
+6. Se a foto ainda nao existir, aparece 'Foto em breve' sem quebrar o site.
+7. Use fotos reais da loja ou imagens autorizadas, evitando anunciar uma
+   apresentacao diferente do produto vendido.
+
+Para alterar o nome do arquivo de uma foto, edite o objeto productPhotos no index.html.
+A foto de exemplo da capa e da batata e ilustrativa.

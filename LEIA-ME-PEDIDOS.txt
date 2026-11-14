@@ -1,0 +1,15 @@
+KID CHIPS - SISTEMA DE PEDIDOS
+
+Abra index.html.
+
+1. Clique em Adicionar ao pedido nos produtos.
+2. Ajuste quantidades no carrinho Meu pedido.
+3. Na batata, clique em Escolher recheios, selecione ate 4 e clique em Adicionar batata ao pedido.
+4. Clique em Enviar pedido pelo WhatsApp.
+
+IMPORTANTE: No final do index.html, procure: const whatsappNumber = "";
+Preencha com o numero OFICIAL do estabelecimento, incluindo 55 e DDD, apenas numeros.
+Sem isso o envio ficara desativado.
+
+O site NAO recebe pagamentos nem envia pedidos automaticamente. Ele prepara uma mensagem para o cliente confirmar o envio no WhatsApp.
+Os valores e itens devem ser conferidos com o cardapio atual.

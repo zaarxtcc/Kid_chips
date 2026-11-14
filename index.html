@@ -1,0 +1,1329 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kid Chips: batatas recheadas, lanches, porções e muito mais. Com você desde 1988.">
+  <title>Kid Chips | Cardápio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- MENU -->
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a class="logo" href="#inicio">
+        <img src="logo.png" alt="Logo Kid Chips" class="logo-img">
+        <span>KID CHIPS</span>
+      </a>
+  
+
+      <div class="menu">
+        <a href="#inicio">Início</a>
+        <a href="#cardapio">Cardápio</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#avaliacoes">Avaliações</a>
+        <a href="#localizacao">Localização</a>
+        <a href="https://www.instagram.com/kidchips/"
+           target="_blank" rel="noopener noreferrer">Instagram</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- INÍCIO -->
+  <header class="hero" id="inicio">
+    <div class="container hero-content">
+
+      <div class="hero-text">
+        <div class="subtitle">Com você desde 1988</div>
+
+        <h1>KID CHIPS</h1>
+        <h2>A tradição tem sabor!</h2>
+
+        <p>
+          Batatas recheadas, lanches, porções e muito mais.
+          Conheça nosso cardápio e escolha seu favorito!
+        </p>
+
+        <div class="buttons">
+          <a class="btn btn-yellow" href="#cardapio">
+            Explorar cardápio
+          </a>
+
+          <button class="btn btn-green" onclick="abrirWhatsApp()">
+            Fazer pedido pelo WhatsApp
+          </button>
+        </div>
+      </div>
+
+      
+    </div>
+  </header>
+
+  <main>
+
+    <!-- CARDÁPIO -->
+    <section id="cardapio">
+      <div class="container">
+
+        <h2 class="section-title">Nosso cardápio</h2>
+
+        <p class="muted">
+          Confira nossas batatas recheadas, lanches,
+          porções, pratos e bebidas.
+          Preços sujeitos a confirmação.
+        </p>
+
+        <!-- CARRINHO DE PEDIDOS -->
+        <section id="meu-pedido" class="cart-section" aria-label="Meu pedido" hidden>
+          <div class="cart-heading">
+            <div>
+              <h2 class="section-title">🛒 Meu pedido <span id="cart-count" class="cart-count">0 itens</span></h2>
+              <p class="muted">Adicione vários produtos, ajuste as quantidades e envie tudo junto pelo WhatsApp. Depois, continue escolhendo logo abaixo.</p>
+            </div>
+            <button type="button" class="btn btn-outline" id="clear-cart">Limpar pedido</button>
+          </div>
+          <div id="cart-items" aria-live="polite"></div>
+          <a class="btn btn-yellow continue-shopping" href="#lista-produtos">↓ Continuar escolhendo no cardápio</a>
+          <div class="cart-footer">
+            <strong>Total estimado: <span id="cart-total">R$ 0,00</span></strong>
+            <button type="button" class="btn btn-green" id="checkout-btn">Enviar pedido pelo WhatsApp</button>
+          </div>
+          <p class="muted cart-note">O pedido será enviado como mensagem para confirmação pela lanchonete. Preços e disponibilidade devem ser confirmados.</p>
+        </section>
+
+
+        <!-- BATATA PERSONALIZADA -->
+        <div class="potato-card">
+
+          <div class="potato-header">
+            <div>
+              <div class="category">Especialidade da casa</div>
+              <h3>Monte sua Batata Inglesa</h3>
+              <p class="muted">
+                Escolha até 4 recheios inclusos e monte do seu jeito!
+              </p>
+              <div class="price">R$ 24,90</div>
+            </div>
+
+            <button class="btn btn-yellow"
+                    id="toggle-potato"
+                    aria-expanded="false"
+                    aria-controls="potato-panel">
+              Montar minha batata
+            </button>
+          </div>
+
+          <div class="potato-panel" id="potato-panel" hidden>
+
+            <h3>Escolha seus recheios</h3>
+
+            <p>
+              Selecione de 1 a 4 opções.
+              Adicionais podem ser solicitados à loja: recheios extras R$ 5,00 e requeijão Scala R$ 8,00.
+            </p>
+
+            <div class="counter" id="counter">
+              0 de 4 recheios selecionados
+            </div>
+
+            <div class="progress">
+              <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <div class="fillings" id="fillings"></div>
+
+            <div class="summary">
+              <strong>Resumo do seu pedido:</strong>
+              <p id="summary-text">Nenhum recheio selecionado.</p>
+              <strong>Total: R$ 24,90</strong>
+            </div>
+
+            <button class="btn btn-green" id="order-potato">
+              Adicionar batata ao pedido
+            </button>
+
+          </div>
+        </div>
+
+        <!-- BUSCA -->
+        <div id="lista-produtos" class="catalog-anchor"></div>
+        <input
+          type="search"
+          class="search"
+          id="search"
+          placeholder="Buscar produto..."
+          aria-label="Buscar produto"
+        >
+
+        <div class="filters" id="filters"></div>
+        <div class="grid" id="products"></div>
+
+        <!-- PERSONALIZAÇÃO DE LANCHES E SUCOS -->
+        <section class="customizer" id="personalizar" hidden aria-label="Personalizar produto">
+          <div class="customizer-head">
+            <div><div class="category">Monte seu pedido</div><h3 id="custom-title"></h3><p id="custom-description"></p></div>
+            <button type="button" class="btn btn-outline" id="close-custom">Fechar</button>
+          </div>
+          <div id="custom-options"></div>
+          <div class="customizer-bottom">
+            <strong id="custom-price"></strong>
+            <button type="button" class="btn btn-yellow" id="custom-add">Adicionar ao carrinho</button>
+          </div>
+        </section>
+
+
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="section-dark">
+      <div class="container">
+
+        <h2 class="section-title">Uma tradição desde 1988</h2>
+
+        <p>
+          A Kid Chips faz parte da história de Americana,
+          oferecendo batatas recheadas, lanches e diversas
+          opções para reunir a família e os amigos.
+        </p>
+
+        <p class="muted">
+          Uma lanchonete com tradição, variedade no cardápio
+          e muitos momentos compartilhados com seus clientes.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- AVALIAÇÕES -->
+    <section id="avaliacoes">
+      <div class="container">
+
+        <h2 class="section-title">O que nossos clientes dizem</h2>
+
+        <div class="review-summary">
+          <div class="rating">
+            4,5 <span class="stars">★★★★★</span>
+          </div>
+
+          <strong>514 avaliações no Google</strong>
+
+          <p class="muted">
+            Nota registrada no material de referência do projeto.
+          </p>
+        </div>
+
+        <div class="grid" id="review-list"></div>
+
+        <div class="center">
+          <button class="btn btn-yellow" id="more-reviews">
+            Ver mais avaliações
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LOCALIZAÇÃO -->
+    <section id="localizacao" class="section-dark">
+      <div class="container">
+
+        <h2 class="section-title">Venha conhecer!</h2>
+
+        <p>
+          Rua das Palmeiras, 355<br>
+          Jardim São Paulo<br>
+          Americana — SP
+        </p>
+
+        <p class="muted">
+          Confira os horários de funcionamento diretamente
+          com o estabelecimento.
+        </p>
+
+        <div class="buttons">
+          <a
+            class="btn btn-yellow"
+            href="https://www.google.com/maps/search/?api=1&amp;query=Rua+das+Palmeiras+355+Americana+SP"
+            target="_blank"
+            rel="noopener noreferrer">
+            Como chegar
+          </a>
+
+          <a
+            class="btn btn-outline"
+            href="https://www.instagram.com/kidchips/"
+            target="_blank"
+            rel="noopener noreferrer">
+            Instagram
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <a href="#meu-pedido" class="floating-cart" aria-label="Ir para meu pedido" hidden>🛒 <span id="floating-cart-count">0</span></a>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <div class="container">
+      <strong>🍟 KID CHIPS</strong>
+      <p>Com você desde 1988!</p>
+      <small>Projeto escolar — Site catálogo</small>
+    </div>
+  </footer>
+
+  <script>
+    // ==========================================
+    // CARDÁPIO
+    // ==========================================
+
+    const products = [
+      [
+            "Batatas",
+            "Batata inglesa recheada",
+            24.9,
+            "Monte com até quatro recheios inclusos. Recheios adicionais R$ 5,00; requeijão Scala R$ 8,00.",
+            "potato"
+      ],
+      [
+            "Panquecas",
+            "Panqueca A",
+            27,
+            "Presunto e mussarela",
+            ""
+      ],
+      [
+            "Panquecas",
+            "Panqueca B",
+            30,
+            "Presunto, mussarela, catupiry e milho",
+            ""
+      ],
+      [
+            "Panquecas",
+            "Panqueca C",
+            30,
+            "Presunto, mussarela e cheddar",
+            ""
+      ],
+      [
+            "Panquecas",
+            "Panqueca D",
+            32,
+            "Presunto, mussarela, frango e catupiry",
+            ""
+      ],
+      [
+            "Panquecas",
+            "Panqueca E",
+            32,
+            "Presunto, mussarela, carne moída e catupiry",
+            ""
+      ],
+      [
+            "Hambúrgueres",
+            "Hambúrguer",
+            15,
+            "Molho especial, tomate e hambúrguer",
+            "sandwich"
+      ],
+      [
+            "Hambúrgueres",
+            "Presado",
+            23,
+            "Molho especial, tomate, presunto e mussarela",
+            "sandwich"
+      ],
+      [
+            "Hambúrgueres",
+            "X Burguer",
+            25,
+            "Molho especial, tomate, hambúrguer e mussarela",
+            "sandwich"
+      ],
+      [
+            "Hambúrgueres",
+            "X Salada",
+            27,
+            "Molho especial, tomate, alface, hambúrguer e mussarela",
+            "sandwich"
+      ],
+      [
+            "Hambúrgueres",
+            "X Bacon",
+            30,
+            "Molho especial, tomate, alface, hambúrguer, bacon e mussarela",
+            "sandwich"
+      ],
+      [
+            "Hambúrgueres",
+            "X Egg",
+            27,
+            "Molho especial, tomate, alface, hambúrguer, ovo e mussarela",
+            "sandwich"
+      ],
+      [
+            "Hambúrgueres",
+            "Calabresa",
+            26,
+            "Molho especial, tomate, calabresa e mussarela",
+            "sandwich"
+      ],
+      [
+            "Hambúrgueres",
+            "Americano",
+            27,
+            "Molho especial, tomate, alface, presunto, ovo e mussarela",
+            "sandwich"
+      ],
+      [
+            "Hambúrgueres",
+            "X Salada Frango",
+            28,
+            "Molho especial, tomate, alface, filé de frango e mussarela",
+            "sandwich"
+      ],
+      [
+            "Hambúrgueres",
+            "X Natural",
+            25,
+            "Molho especial, tomate, alface, ovo, ervilha, milho, palmito e mussarela",
+            "sandwich"
+      ],
+      [
+            "Hambúrgueres",
+            "X Tudo",
+            32,
+            "Molho especial, tomate, alface, hambúrguer, presunto, bacon, ovo e mussarela",
+            "sandwich"
+      ],
+      [
+            "Hambúrgueres",
+            "X Tudo Frango",
+            30,
+            "Molho especial, tomate, alface, filé de frango, ovo, bacon, presunto e mussarela",
+            "sandwich"
+      ],
+      [
+            "Hambúrgueres",
+            "Frango Empanado",
+            32,
+            "Molho especial, tomate, alface, frango empanado e mussarela",
+            "sandwich"
+      ],
+      [
+            "Pão francês",
+            "Churrasco",
+            28,
+            "Tomate e contrafilé",
+            "sandwich"
+      ],
+      [
+            "Pão francês",
+            "Bauru",
+            32,
+            "Tomate, contrafilé e mussarela",
+            "sandwich"
+      ],
+      [
+            "Pão francês",
+            "Misto Quente",
+            23,
+            "Tomate, presunto e mussarela",
+            "sandwich"
+      ],
+      [
+            "Pratos",
+            "Lobo Mau (2 pessoas)",
+            70,
+            "Mussarela, presunto, catupiry, coração de alcatra, pão de forma, omelete e molho de tomate",
+            ""
+      ],
+      [
+            "Pratos",
+            "Lobo Mau (1 pessoa)",
+            39,
+            "Mussarela, presunto, catupiry, coração de alcatra, pão de forma, omelete e molho de tomate",
+            ""
+      ],
+      [
+            "Pratos",
+            "Parmegiana (2 pessoas)",
+            99.9,
+            "Coração de alcatra à milanesa, molho de tomate, arroz, fritas e mussarela",
+            ""
+      ],
+      [
+            "Pratos",
+            "Parmegiana (1 pessoa)",
+            59.9,
+            "Coração de alcatra à milanesa, molho de tomate, arroz, fritas e mussarela",
+            ""
+      ],
+      [
+            "Pratos",
+            "Parmegiana de frango (2 pessoas)",
+            90,
+            "Filé de frango à milanesa, molho de tomate, arroz, fritas e mussarela",
+            ""
+      ],
+      [
+            "Pratos",
+            "Parmegiana de frango (1 pessoa)",
+            50,
+            "Filé de frango à milanesa, molho de tomate, arroz, fritas e mussarela",
+            ""
+      ],
+      [
+            "Porções",
+            "Fritas — meia porção",
+            18,
+            "Batatas fritas (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Fritas — inteira",
+            29,
+            "Batatas fritas (porção inteira)",
+            ""
+      ],
+      [
+            "Porções",
+            "Fritas com queijo — meia porção",
+            22.9,
+            "Batatas fritas com queijo (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Fritas com queijo — inteira",
+            37.9,
+            "Batatas fritas com queijo (porção inteira)",
+            ""
+      ],
+      [
+            "Porções",
+            "Fritas com queijo e bacon — meia porção",
+            25.9,
+            "Batatas fritas com queijo e bacon (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Fritas com queijo e bacon — inteira",
+            43.9,
+            "Batatas fritas com queijo e bacon (porção inteira)",
+            ""
+      ],
+      [
+            "Porções",
+            "Fritas com cheddar e bacon — meia porção",
+            25.9,
+            "Batatas fritas com cheddar e bacon (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Fritas com cheddar e bacon — inteira",
+            43.9,
+            "Batatas fritas com cheddar e bacon (porção inteira)",
+            ""
+      ],
+      [
+            "Porções",
+            "Mandioca frita — meia porção",
+            20,
+            "Mandioca frita (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Mandioca frita — inteira",
+            35,
+            "Mandioca frita (porção inteira)",
+            ""
+      ],
+      [
+            "Porções",
+            "Bolinho de queijo — meia porção",
+            24.9,
+            "Bolinhos de queijo (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Bolinho de queijo — inteira",
+            40,
+            "Bolinhos de queijo (porção inteira)",
+            ""
+      ],
+      [
+            "Porções",
+            "Polenta com queijo — meia porção",
+            20,
+            "Polenta com queijo (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Polenta com queijo — inteira",
+            32,
+            "Polenta com queijo (porção inteira)",
+            ""
+      ],
+      [
+            "Porções",
+            "Calabresa acebolada — meia porção",
+            27.9,
+            "Calabresa acebolada (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Calabresa acebolada — inteira",
+            42,
+            "Calabresa acebolada (porção inteira)",
+            ""
+      ],
+      [
+            "Porções",
+            "Isca de frango — meia porção",
+            27.9,
+            "Iscas de frango (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Isca de frango — inteira",
+            42,
+            "Iscas de frango (porção inteira)",
+            ""
+      ],
+      [
+            "Porções",
+            "Coxinha — meia porção",
+            24,
+            "Porção de coxinhas (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Coxinha — inteira",
+            40,
+            "Porção de coxinhas (porção inteira)",
+            ""
+      ],
+      [
+            "Porções",
+            "Quibe — meia porção",
+            24,
+            "Porção de quibes (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Quibe — inteira",
+            40,
+            "Porção de quibes (porção inteira)",
+            ""
+      ],
+      [
+            "Porções",
+            "Filé de frango acebolado — meia porção",
+            30,
+            "Filé de frango acebolado (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Filé de frango acebolado — inteira",
+            50,
+            "Filé de frango acebolado (porção inteira)",
+            ""
+      ],
+      [
+            "Porções",
+            "Filé de alcatra acebolado — meia porção",
+            47.9,
+            "Filé de alcatra acebolado (meia porção)",
+            ""
+      ],
+      [
+            "Porções",
+            "Filé de alcatra acebolado — inteira",
+            65,
+            "Filé de alcatra acebolado (porção inteira)",
+            ""
+      ],
+      [
+            "Sucos",
+            "Suco de Laranja",
+            10,
+            "Copo de 400 ml. Escolha a base: água, leite (+ R$ 4,00) ou laranja (+ R$ 4,00).",
+            "juice"
+      ],
+      [
+            "Sucos",
+            "Suco de Laranja suíça",
+            15,
+            "Copo de 400 ml. Escolha a base: água, leite (+ R$ 4,00) ou laranja (+ R$ 4,00).",
+            "juice"
+      ],
+      [
+            "Sucos",
+            "Suco de Limonada suíça",
+            15,
+            "Copo de 400 ml. Escolha a base: água, leite (+ R$ 4,00) ou laranja (+ R$ 4,00).",
+            "juice"
+      ],
+      [
+            "Sucos",
+            "Suco de Morango",
+            12,
+            "Copo de 400 ml. Escolha a base: água, leite (+ R$ 4,00) ou laranja (+ R$ 4,00).",
+            "juice"
+      ],
+      [
+            "Sucos",
+            "Suco de Abacaxi",
+            12,
+            "Copo de 400 ml. Escolha a base: água, leite (+ R$ 4,00) ou laranja (+ R$ 4,00).",
+            "juice"
+      ],
+      [
+            "Sucos",
+            "Suco de Maracujá",
+            12,
+            "Copo de 400 ml. Escolha a base: água, leite (+ R$ 4,00) ou laranja (+ R$ 4,00).",
+            "juice"
+      ],
+      [
+            "Sucos",
+            "Suco de Uva",
+            12,
+            "Copo de 400 ml. Escolha a base: água, leite (+ R$ 4,00) ou laranja (+ R$ 4,00).",
+            "juice"
+      ],
+      [
+            "Sucos",
+            "Suco de Abacaxi com hortelã",
+            12,
+            "Copo de 400 ml. Escolha a base: água, leite (+ R$ 4,00) ou laranja (+ R$ 4,00).",
+            "juice"
+      ],
+      [
+            "Sucos",
+            "Suco de Suco de limão",
+            10,
+            "Copo de 400 ml. Escolha a base: água, leite (+ R$ 4,00) ou laranja (+ R$ 4,00).",
+            "juice"
+      ],
+      [
+            "Bebidas",
+            "Água tônica",
+            7,
+            "Água tônica",
+            ""
+      ],
+      [
+            "Bebidas",
+            "Água com gás 500 ml",
+            4,
+            "Garrafa de 500 ml",
+            ""
+      ],
+      [
+            "Bebidas",
+            "Água sem gás 500 ml",
+            3.5,
+            "Garrafa de 500 ml",
+            ""
+      ],
+      [
+            "Bebidas",
+            "Água H2O",
+            8,
+            "Bebida H2O",
+            ""
+      ],
+      [
+            "Bebidas",
+            "Refrigerante lata",
+            7,
+            "Escolha o sabor disponível: Coca-Cola, Fanta Laranja, Fanta Uva, Sprite, Guaraná Antarctica, Coca Zero ou Sprite Zero",
+            ""
+      ],
+      [
+            "Bebidas",
+            "Copo com gelo e limão",
+            1.5,
+            "Complemento para bebidas",
+            ""
+      ],
+      [
+            "Bebidas",
+            "Schweppes citrus",
+            8,
+            "Refrigerante Schweppes Citrus",
+            ""
+      ]
+];
+
+    const categories = [
+      "Todos",
+      ...new Set(products.map(product => product[0]))
+    ];
+
+    let selectedCategory = "Todos";
+
+    const filters = document.getElementById("filters");
+    const productArea = document.getElementById("products");
+    const searchInput = document.getElementById("search");
+
+    function formatPrice(value) {
+      return value.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+      });
+    }
+
+    // Para trocar uma foto, basta salvar a imagem com o nome indicado.
+    // Você também pode cadastrar nomes específicos nesta lista.
+    // Fotos locais organizadas conforme os nomes enviados.
+    const productPhotos = {
+      "Batata inglesa recheada": "batata-inglesa.jpg",
+      "Panqueca A": "panceque_presunto_mussarela.webp",
+      "Panqueca B": "panceque_presunto_mussarela.webp",
+      "Panqueca C": "panceque_presunto_mussarela.webp",
+      "Panqueca D": "panqueca_frango.webp",
+      "Panqueca E": "panqueca_carne.webp",
+      "Hambúrguer": "burger.webp",
+      "Presado": "misto_quente.webp",
+      "X Burguer": "burger.webp",
+      "X Salada": "salada.webp",
+      "X Bacon": "bacon.webp",
+      "X Egg": "burger.webp",
+      "Calabresa": "calabresa_acebolada.webp",
+      "Americano": "salada.webp",
+      "X Salada Frango": "frango_grelhado.webp",
+      "X Natural": "salada.webp",
+      "X Tudo": "tudo.webp",
+      "X Tudo Frango": "tudo.webp",
+      "Frango Empanado": "frango_grelhado.webp",
+      "Churrasco": "bauru_churrasco.webp",
+      "Bauru": "tradicional_bauru.webp",
+      "Misto Quente": "misto_quente.webp",
+      "Lobo Mau (2 pessoas)": "lobo_mau.webp",
+      "Lobo Mau (1 pessoa)": "lobo_mau.webp"
+    };
+
+    function productImage(product) {
+      const name = product[1];
+      let file = productPhotos[name];
+      if (!file && name.startsWith("Parmegiana")) file = "parmegiana.png";
+      if (!file && name.startsWith("Fritas")) file = name.includes("bacon") ? "fritas_bacon.webp" : "batata_frita.png";
+      if (!file && name.startsWith("Mandioca")) file = "mandioca.webp";
+      if (!file && name.startsWith("Bolinho de queijo")) file = "bolinha-de-queijo-de-liquidificador-32147-1-1024x720.webp";
+      if (!file && name.startsWith("Calabresa acebolada")) file = "calabresa_acebolada.webp";
+      if (!file && name.startsWith("Isca de frango")) file = "isca_frango.webp";
+      if (!file && name.startsWith("Coxinha")) file = "bolinha-de-queijo-de-liquidificador-32147-1-1024x720.webp";
+      if (!file && name.startsWith("Quibe")) file = "kibe.webp";
+      if (!file && name.startsWith("Filé de frango")) file = "frango_grelhado.webp";
+      if (!file && name.startsWith("Filé de alcatra")) file = "bauru_churrasco.webp";
+      if (!file && name.startsWith("Polenta")) file = "batata_frita.png";
+      return file ? "imagens/" + file : null;
+    }
+
+    function renderProducts() {
+      filters.innerHTML = "";
+
+      categories.forEach(category => {
+        const button = document.createElement("button");
+
+        button.className =
+          "filter" + (category === selectedCategory ? " active" : "");
+
+        button.textContent = category;
+
+        button.addEventListener("click", () => {
+          selectedCategory = category;
+          renderProducts();
+        });
+
+        filters.appendChild(button);
+      });
+
+      productArea.innerHTML = "";
+
+      const filtered = products.filter(product => {
+        const matchesCategory =
+          selectedCategory === "Todos" ||
+          product[0] === selectedCategory;
+
+        const matchesSearch =
+          (product[1] + " " + product[3]).toLowerCase().includes(
+            searchInput.value.toLowerCase()
+          );
+
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        productArea.textContent = "Nenhum produto encontrado.";
+        return;
+      }
+
+      filtered.forEach(product => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const category = document.createElement("span");
+        category.className = "category";
+        category.textContent = product[0];
+
+        const title = document.createElement("h3");
+        title.textContent = product[1];
+
+        const description = document.createElement("p");
+        description.textContent =
+          product[3];
+
+        const price = document.createElement("div");
+        price.className = "price";
+        price.textContent = formatPrice(product[2]);
+
+        // Cada produto pode ter uma foto própria na pasta imagens.
+        // Se o arquivo não existir, o cartão exibe um espaço ilustrativo.
+        const imageBox = document.createElement("div");
+        imageBox.className = "product-image";
+        const image = document.createElement("img");
+        image.loading = "lazy";
+        image.alt = "Foto ilustrativa de " + product[1];
+        image.src = productImage(product) || "";
+        image.onerror = () => {
+          image.remove();
+          imageBox.classList.add("without-image");
+          imageBox.textContent = "Foto em breve";
+        };
+        imageBox.appendChild(image);
+        const addButton = document.createElement("button");
+        addButton.type = "button";
+        addButton.className = "btn btn-yellow product-add";
+        addButton.textContent = product[4] === "potato" ? "Escolher recheios" : ["sandwich","juice"].includes(product[4]) ? "Personalizar e adicionar" : "+ Adicionar ao pedido";
+        addButton.addEventListener("click", () => {
+          if (product[4] === "potato") {
+            potatoPanel.hidden = false;
+            togglePotato.textContent = "Fechar montagem";
+            togglePotato.setAttribute("aria-expanded", "true");
+            document.querySelector(".potato-card").scrollIntoView({behavior:"smooth",block:"center"});
+          } else if (["sandwich", "juice"].includes(product[4])) {
+            openCustomizer(product);
+          } else {
+            addToCart(product[1], product[2]);
+            showCart();
+            addButton.textContent = "✓ Adicionado!";
+            setTimeout(() => { addButton.textContent = "+ Adicionar ao pedido"; }, 1100);
+          }
+        });
+        if (productImage(product)) {
+          card.appendChild(imageBox);
+        } else {
+          card.classList.add("no-photo-card");
+        }
+        card.append(category, title, description, price, addButton);
+        productArea.appendChild(card);
+      });
+    }
+
+    searchInput.addEventListener("input", renderProducts);
+    renderProducts();
+
+    // ==========================================
+    // MONTAGEM DA BATATA
+    // ==========================================
+
+    const fillings = [
+      "Bacon",
+      "Calabresa",
+      "Frango desfiado",
+      "Presunto",
+      "Carne moída",
+      "Mussarela",
+      "Provolone",
+      "Gorgonzola",
+      "Cheddar",
+      "Requeijão",
+      "Azeitona",
+      "Brócolis",
+      "Champignon",
+      "Ervilha",
+      "Milho",
+      "Palmito"
+    ];
+
+    const selectedFillings = new Set();
+
+    const potatoPanel = document.getElementById("potato-panel");
+    const togglePotato = document.getElementById("toggle-potato");
+    const fillingsArea = document.getElementById("fillings");
+    const counter = document.getElementById("counter");
+    const progressBar = document.getElementById("progress-bar");
+    const summaryText = document.getElementById("summary-text");
+
+    togglePotato.addEventListener("click", () => {
+      potatoPanel.hidden = !potatoPanel.hidden;
+
+      togglePotato.textContent = potatoPanel.hidden
+        ? "Montar minha batata"
+        : "Fechar montagem";
+
+      togglePotato.setAttribute(
+        "aria-expanded",
+        String(!potatoPanel.hidden)
+      );
+    });
+
+    fillings.forEach(filling => {
+      const label = document.createElement("label");
+      label.className = "filling";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.value = filling;
+
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+          if (selectedFillings.size >= 4) {
+            checkbox.checked = false;
+            alert("Você pode selecionar até 4 recheios.");
+            return;
+          }
+
+          selectedFillings.add(filling);
+        } else {
+          selectedFillings.delete(filling);
+        }
+
+        updatePotato();
+      });
+
+      label.append(checkbox, document.createTextNode(filling));
+      fillingsArea.appendChild(label);
+    });
+
+    function updatePotato() {
+      const count = selectedFillings.size;
+
+      counter.textContent =
+        count + " de 4 recheios selecionados";
+
+      progressBar.style.width = (count / 4 * 100) + "%";
+
+      summaryText.textContent = count
+        ? [...selectedFillings].join(", ")
+        : "Nenhum recheio selecionado.";
+    }
+
+    // ==========================================
+    // WHATSAPP
+    // ==========================================
+
+    // Substitua pelo número oficial com DDD.
+    // Exemplo de formato: 5519999999999
+    const whatsappNumber = "5519999314057";
+
+    function abrirWhatsApp(message = "") {
+      if (!whatsappNumber) {
+        alert(
+          "É necessário configurar o número oficial " +
+          "do WhatsApp da Kid Chips."
+        );
+        return;
+      }
+
+      const url = "https://wa.me/" + whatsappNumber +
+        "?text=" + encodeURIComponent(message);
+
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    // ==========================================
+    // CARRINHO: VÁRIOS PRODUTOS NO MESMO PEDIDO
+    // ==========================================
+    // Complementos para lanches: valores transcritos do cardápio.
+    const sandwichExtras = [
+      ["Ervilha",3],["Milho",3],["Bacon",6],["Ovo",3],
+      ["Presunto",5],["Queijo",5],["Hambúrguer",7],
+      ["Requeijão Scala",8],["Cebola na chapa",4],
+      ["Palmito",4],["Cheddar",5],["Batata palha",3],
+      ["Champignon",4],["Azeitona preta",4],["Tomate seco",5]
+    ];
+    let currentCustom = null;
+    const customBox = document.getElementById("personalizar");
+    const customOptions = document.getElementById("custom-options");
+    function openCustomizer(product) {
+      currentCustom = product;
+      document.getElementById("custom-title").textContent = product[1];
+      document.getElementById("custom-description").textContent = product[3];
+      customOptions.innerHTML = "";
+      if (product[4] === "sandwich") {
+        const heading = document.createElement("h4");
+        heading.textContent = "Complementos opcionais";
+        customOptions.appendChild(heading);
+        const grid = document.createElement("div");
+        grid.className = "custom-grid";
+        sandwichExtras.forEach(([name,price]) => {
+          const label = document.createElement("label"); label.className="custom-choice";
+          const check = document.createElement("input"); check.type="checkbox";check.dataset.price=price;check.value=name;
+          check.addEventListener("change", updateCustomPrice);
+          label.append(check,document.createTextNode(" " + name + " (+ " + formatPrice(price) + ")"));
+          grid.appendChild(label);
+        });
+        customOptions.appendChild(grid);
+      } else if (product[4] === "juice") {
+        const heading=document.createElement("h4"); heading.textContent="Escolha a base do suco";
+        customOptions.appendChild(heading);
+        const grid=document.createElement("div"); grid.className="custom-grid";
+        [["Água",0],["Leite",4],["Laranja",4]].forEach(([name,price],i)=>{
+          const label=document.createElement("label");label.className="custom-choice";
+          const radio=document.createElement("input");radio.type="radio";radio.name="juice-base";radio.value=name;radio.dataset.price=price;radio.checked=i===0;
+          radio.addEventListener("change",updateCustomPrice);
+          label.append(radio,document.createTextNode(" " + name + (price ? " (+ " + formatPrice(price) + ")" : "")));
+          grid.appendChild(label);
+        });
+        customOptions.appendChild(grid);
+      }
+      customBox.hidden=false;updateCustomPrice();
+      customBox.scrollIntoView({behavior:"smooth",block:"center"});
+    }
+    function selectedCustom() {
+      if (!currentCustom) return {price:0,details:""};
+      const inputs=[...customOptions.querySelectorAll("input:checked")];
+      return {price:currentCustom[2]+inputs.reduce((sum,input)=>sum+Number(input.dataset.price),0),
+        details:inputs.length ? (currentCustom[4]==="juice" ? "Base: " : "Adicionais: ")+inputs.map(input=>input.value).join(", ") : "Sem adicionais"};
+    }
+    function updateCustomPrice() {
+      document.getElementById("custom-price").textContent="Total: "+formatPrice(selectedCustom().price);
+    }
+    document.getElementById("close-custom").addEventListener("click",()=>{customBox.hidden=true;});
+    document.getElementById("custom-add").addEventListener("click",()=>{
+      if (!currentCustom)return;
+      const choice=selectedCustom();addToCart(currentCustom[1],choice.price,choice.details);
+      customBox.hidden=true;
+      showCart();
+    });
+
+    function showCart() {
+      if (!cart.length) return;
+      document.getElementById("meu-pedido").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+
+    const cart = [];
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const cartCount = document.getElementById("cart-count");
+
+    function addToCart(name, price, details = "") {
+      const found = cart.find(item => item.name === name && item.details === details);
+      if (found) found.quantity++;
+      else cart.push({ name, price, details, quantity: 1 });
+      renderCart();
+    }
+
+    function renderCart() {
+      cartItems.innerHTML = "";
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      cartCount.textContent = count + (count === 1 ? " item" : " itens");
+      document.getElementById("floating-cart-count").textContent = count;
+      cartTotal.textContent = formatPrice(total);
+      document.getElementById("meu-pedido").hidden = count === 0;
+      document.querySelector(".floating-cart").hidden = count === 0;
+      if (!cart.length) {
+        const empty = document.createElement("p");
+        empty.className = "cart-empty";
+        empty.textContent = "Seu pedido está vazio. Escolha os produtos logo abaixo.";
+        cartItems.appendChild(empty);
+      }
+      cart.forEach((item, index) => {
+        const line = document.createElement("div");
+        line.className = "cart-line";
+        const info = document.createElement("div");
+        info.className = "cart-info";
+        const name = document.createElement("strong");
+        name.textContent = item.name;
+        info.appendChild(name);
+        if (item.details) {
+          const detail = document.createElement("small");
+          detail.textContent = item.details;
+          info.appendChild(detail);
+        }
+        const subtotal = document.createElement("span");
+        subtotal.textContent = formatPrice(item.price * item.quantity);
+        const controls = document.createElement("div");
+        controls.className = "cart-controls";
+        const minus = document.createElement("button");
+        minus.type = "button"; minus.textContent = "−"; minus.setAttribute("aria-label", "Diminuir quantidade de " + item.name);
+        minus.onclick = () => { item.quantity--; if (item.quantity <= 0) cart.splice(index, 1); renderCart(); };
+        const qty = document.createElement("span"); qty.textContent = item.quantity;
+        const plus = document.createElement("button");
+        plus.type = "button"; plus.textContent = "+"; plus.setAttribute("aria-label", "Aumentar quantidade de " + item.name);
+        plus.onclick = () => { item.quantity++; renderCart(); };
+        const remove = document.createElement("button");
+        remove.type = "button"; remove.textContent = "Remover"; remove.className = "cart-remove";
+        remove.onclick = () => { cart.splice(index, 1); renderCart(); };
+        controls.append(minus, qty, plus, remove);
+        line.append(info, subtotal, controls);
+        cartItems.appendChild(line);
+      });
+    }
+
+    document.getElementById("order-potato").addEventListener("click", () => {
+      if (!selectedFillings.size) {
+        alert("Escolha pelo menos um recheio.");
+        return;
+      }
+      addToCart("Batata Inglesa Recheada", 24.90, "Recheios: " + [...selectedFillings].join(", "));
+      showCart();
+    });
+
+    document.getElementById("clear-cart").addEventListener("click", () => {
+      cart.length = 0;
+      renderCart();
+    });
+
+    document.getElementById("checkout-btn").addEventListener("click", () => {
+      if (!cart.length) { alert("Adicione pelo menos um produto ao pedido."); return; }
+      const lines = cart.map(item =>
+        `${item.quantity}x ${item.name}${item.details ? " (" + item.details + ")" : ""} — ${formatPrice(item.price * item.quantity)}`
+      );
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      const message = "Olá, Kid Chips! Gostaria de fazer o seguinte pedido:\n\n" +
+        lines.join("\n") + "\n\nTotal estimado: " + formatPrice(total) +
+        "\n\nPodem confirmar a disponibilidade e o valor final, por favor?";
+      abrirWhatsApp(message);
+    });
+    renderCart();
+
+    // ==========================================
+    // AVALIAÇÕES
+    // ==========================================
+
+    const reviews = [
+      ["Bruno Giraldelli", "Tradição e qualidade."],
+      ["Diego Fernandes",
+        "Ótimo com preço muito acessível. A batata serve 02 pessoas tranquilo."],
+      ["Silmara Romero",
+        "Ótimo local. Atendimento e comida ótimos. Bem familiar."],
+      ["Graziele Cristina",
+        "Sempre vou pra comer a batata recheada, ela vem muito bem servida e é uma delícia, 1 batata serve 2 pessoas."],
+      ["Guto Campos Consultor Financeiro",
+        "Lanchonete muito legal, com opções de comida, batata recheada, lanches e porções."],
+      ["Henrique Lourenço",
+        "Pra quem gosta de comer e jogar bilhar, super indico."],
+      ["Jaque Apolinário",
+        "Estão de parabéns qualidade, agilidade, bom atendimento e simpatia."],
+      ["Anny Karollyne",
+        "Comida maravilhosa, com o mesmo sabor."],
+      ["Iasmim Dechiare",
+        "Tudo sempre muito gostoso e feito com carinho, além do preço acessível."],
+      ["Fabio Gonçalves",
+        "Batata recheada come duas pessoas fácil, ambiente calmo, simples e familiar."],
+      ["Jose Urias da Silva",
+        "Vocês deveriam experimentar a batata inglesa, nunca vi igual."],
+      ["Euclides Rodrigues",
+        "Ótimo lugar para quem gosta de fartura na hora de comer uma batata recheada."],
+      ["Ana Paula Gomes de Almeida",
+        "Ótimo lugar para ir com a família."],
+      ["Wagner Silveira",
+        "A batata inglesa é uma delícia."],
+      ["Gabrielly Paes",
+        "Melhor batata recheada da região!"],
+      ["Greice Hoffman",
+        "Ótimos lanches! Espaço agradável para visitar com a família."],
+      ["Mary Gomes",
+        "Bom atendimento. E bem família."],
+      ["William Duarte",
+        "Bom atendimento, comida muito saborosa e lugar aconchegante."],
+      ["Thais Dias",
+        "Melhor batata que já comi, super recheada."],
+      ["Raquel Cristina Lima Nunes Dos Santos",
+        "Tudo perfeito, a gente ama esse lugar."],
+      ["Jéter Tovani",
+        "Uma batata serve bem até duas pessoas."],
+      ["Fabiana Fogaça da Silva",
+        "Excelente lugar e a batata inglesa não tem melhor!"],
+      ["Luis Rogerio Fernandes",
+        "Excelente cardápio, preço justo, ótimo atendimento."],
+      ["Marcelo Eliseu da Silva",
+        "Muito boa a batata inglesa."],
+      ["Denis Alexandre",
+        "O preço cabe no bolso."],
+      ["Jose Luiz",
+        "Ótimo atendimento, ambiente agradável, prato saboroso."],
+      ["Manu Santaclara",
+        "Lugar ótimo e as batatas recheadas são as melhores."],
+      ["Francisco Taveira",
+        "Lugar agradável e as batatas recheadas são as melhores da região."],
+      ["Everton Duarte",
+        "A batata recheada é bem servida."],
+      ["Lucas Bignotto",
+        "Muito bom! Adoro os lanches e as batatas recheadas!"]
+    ];
+
+    const reviewList = document.getElementById("review-list");
+    const moreReviews = document.getElementById("more-reviews");
+
+    let showAllReviews = false;
+
+    function renderReviews() {
+      reviewList.innerHTML = "";
+
+      const visibleReviews = showAllReviews
+        ? reviews
+        : reviews.slice(0, 3);
+
+      visibleReviews.forEach(review => {
+        const card = document.createElement("article");
+        card.className = "review";
+
+        const name = document.createElement("strong");
+        name.textContent = review[0];
+
+        const text = document.createElement("p");
+        text.textContent = "“" + review[1] + "”";
+
+        const source = document.createElement("small");
+        source.textContent = "Avaliação do Google";
+
+        card.append(name, text, source);
+        reviewList.appendChild(card);
+      });
+
+      moreReviews.textContent = showAllReviews
+        ? "Ver menos avaliações"
+        : "Ver mais avaliações";
+
+      moreReviews.setAttribute(
+        "aria-expanded",
+        String(showAllReviews)
+      );
+    }
+
+    moreReviews.addEventListener("click", () => {
+      showAllReviews = !showAllReviews;
+      renderReviews();
+    });
+
+    renderReviews();
+  </script>
+
+</body>
+</html>

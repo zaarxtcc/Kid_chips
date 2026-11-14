@@ -1,0 +1,15 @@
+KID CHIPS — CARDÁPIO ATUALIZADO
+
+Cardápio transcrito das quatro fotos enviadas pelo usuário.
+Inclui lanches, pratos, porções, panquecas, batata recheada, sucos e bebidas não alcoólicas.
+
+- Lanches no pão de hambúrguer e pão francês: botão de personalização com complementos e preços do cardápio.
+- Sucos: escolha da base água (inclusa), leite (+ R$ 4,00) ou laranja (+ R$ 4,00).
+- Batata: até quatro recheios inclusos.
+- Carrinho: quantidades, remoção, total e mensagem pronta para WhatsApp.
+- Para ativar o WhatsApp, procure const whatsappNumber = ""; no index.html e coloque o número comercial.
+- Fotos: substitua arquivos da pasta imagens; o sistema mostra 'Foto em breve' quando a foto não existir.
+
+Produtos com restrição de idade não foram incluídos no sistema de pedidos.
+Itens cuja identificação no cardápio estava ilegível/ambígua foram omitidos em vez de inventados.
+Confira os preços com o estabelecimento antes da publicação.

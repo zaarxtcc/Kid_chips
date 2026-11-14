@@ -1,0 +1,9 @@
+KID CHIPS - ENTREGA FINAL
+
+1. Abra index.html no navegador.
+2. WhatsApp configurado: +55 19 99931-4057.
+3. Carrinho no topo do cardapio, com botao para voltar aos produtos.
+4. Botao flutuante de carrinho visivel durante a navegacao.
+5. Fotos: coloque arquivos na pasta imagens conforme nomes do LEIA-ME-FOTOS.txt.
+6. O envio ao WhatsApp abre a mensagem pronta; o cliente confirma o envio.
+7. Confira precos e informacoes antes de publicar.
